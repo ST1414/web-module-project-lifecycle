@@ -70,16 +70,13 @@ class App extends React.Component {
 
   render() {
     return(
-      <div className='body-container'>
-        <h1>Github Info (App JS)</h1>
-        {/* ----- SEARCH CONTAINER ----- */}
-        <form className='search-container'>
-          <input type='text' name='search' value={this.state.search} onChange={this.changeHandler} placeholder='Search Github Handle...'/>
+      <div className='body-section'>
+        <h1>Github Grabber</h1>
+        <form className='search-section'>
+          <input type='text' id='search-bar' value={this.state.search} onChange={this.changeHandler} placeholder='Search Git Handle...'/>
           <button onClick={this.handleSubmit}>Got Git'em!</button>
         </form>
-        {/* ----- USER CONTAINER ----- */}
         <User user={this.state.user}/>
-        {/* ----- FOLLOWERS CONTAINER ----- */}
         <FollowerList followers={this.state.followers}/>
       </div>
     );
