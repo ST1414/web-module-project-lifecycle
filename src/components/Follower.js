@@ -5,8 +5,10 @@ class Follower extends React.Component {
 
     render (){
         return (
-            <div>
-                <h1>Follower.JS</h1>
+            
+            <div className='follower'>
+                <img className='follower-image' width='100px' src={this.props.follower.avatar_url} alt='Avatar'/>
+                <p>{this.props.follower.login}</p>
             </div>
         )
     }

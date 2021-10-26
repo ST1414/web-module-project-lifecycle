@@ -3,58 +3,84 @@ import React from 'react';
 import './index.css';
 import User from './components/User';
 import FollowerList from './components/FollowerList';
-import Follower from './components/Follower';
+import axios from 'axios';
 
 
 class App extends React.Component {
   
   state = {
-    search: '',
-    user: [],
+    search: 'wlongmire',
+    user: {},
     followers: []
   }
   
+  componentDidMount(){
+    // ----- Initial user state load
+    axios.get(`https://api.github.com/users/${this.state.search}`)
+      .then( response => {
+        this.setState({
+          ...this.state,
+          user: response.data
+        })
+      })
+      .catch( error => {
+        console.log(error);
+      })
+  }
+
+  componentDidUpdate(prevProps, prevState){
+    // ----- Initial follower state load
+    if (this.state.user !== prevState.user){
+      axios.get(`https://api.github.com/users/${this.state.search}/followers`)
+        .then( response => {
+          this.setState({
+            ...this.state,
+            followers: response.data
+          })
+        })
+        .catch( error => {
+          console.log(error);
+        })
+        .finally(
+          this.setState({...this.state, search: ''})
+        )
+    } 
+  }
+
+  changeHandler = (event) => {
+    this.setState({...this.state, search: event.target.value});
+  }
+
+  handleSubmit = (event) => {
+    event.preventDefault();
+    axios.get(`https://api.github.com/users/${this.state.search}`)
+      .then(response => {
+        this.setState({
+          ...this.state,
+          user: response.data
+        })
+      })
+      .catch(error => {
+        console.log(error)
+      })
+  }
+
+
+  //
+
   render() {
     return(
       <div className='body-container'>
         <h1>Github Info (App JS)</h1>
-        <div className='search-container'>
-          <input placeholder='Seach Github Handle...'/>
-          <button>Got Git'em!</button>
-        </div>
-        <div className='user-container'>
-          <img className='user-image' width='200px' src='https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' alt='Person'/>
-          <div className='user-info'>
-            <h2>Name</h2>
-            <h4>(Handle)</h4>
-            <p>Total Repos: Number</p>
-            <p>Total Followers: Number</p>
-          </div>
-        </div>
-        <div className='followers-container'>
-          <h2>Followers:</h2>
-          <div className='follower-icons'>
-            <div className='follower'>
-              <img className='follower-image' src='https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' alt='Person'/>
-              <h4>Name</h4>
-            </div>
-            <div className='follower'>
-              <img className='follower-image' src='https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' alt='Person'/>
-              <h4>Name</h4>
-            </div>
-            <div className='follower'>
-              <img className='follower-image' src='https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' alt='Person'/>
-              <h4>Name</h4>
-            </div>
-            <div className='follower'>
-              <img className='follower-image' src='https://images.pexels.com/photos/2269872/pexels-photo-2269872.jpeg?auto=compress&cs=tinysrgb&dpr=3&h=750&w=1260' alt='Person'/>
-              <h4>Name</h4>
-            </div>
-          </div>
-        </div>
-        <User />
-        <FollowerList />
-        <Follower />
+        {/* ----- SEARCH CONTAINER ----- */}
+        <form className='search-container'>
+          <input type='text' name='search' value={this.state.search} onChange={this.changeHandler} placeholder='Search Github Handle...'/>
+          <button onClick={this.handleSubmit}>Got Git'em!</button>
+        </form>
+        {/* ----- USER CONTAINER ----- */}
+        <User user={this.state.user}/>
+        {/* ----- FOLLOWERS CONTAINER ----- */}
+        <FollowerList followers={this.state.followers}/>
       </div>
     );
   }

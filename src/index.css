@@ -29,15 +29,12 @@ body h1 {
 }
 .user-container {
   display: flex;
-  border: 2px red solid;
-  /* justify-content: space-evenly; */
 }
 .user-info{
   padding: 0px 20px;
   display: flex;
   flex-direction: column;
   justify-content: flex-start;
-  border: 2px blue solid;
 }
 .follower-icons {
   display: flex;
