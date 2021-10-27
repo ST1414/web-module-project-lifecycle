@@ -12,7 +12,11 @@ class FollowerList extends React.Component {
                 <div className='followers-container'>
                     {/* ----- FOLLOWER ICONS ----- */}
                     {this.props.followers.map( follower => {
-                        return <Follower key={follower.id} follower={follower}/>
+                        return <Follower 
+                            key={follower.id} 
+                            follower={follower} 
+                            handleFollowerClick={this.props.handleFollowerClick}
+                        />
                     })}
                 </div>
             </div>
