@@ -9,7 +9,7 @@ import axios from 'axios';
 class App extends React.Component {
   
   state = {
-    search: 'wlongmire',
+    search: 'st1414',
     user: {},
     followers: []
   }
@@ -81,10 +81,10 @@ class App extends React.Component {
   render() {
     return(
       <div className='body-section'>
-        <h1>Github Grabber</h1>
+        <h1>GitHub Grabber</h1>
         <form className='search-section'>
           <input type='text' id='search-bar' value={this.state.search} onChange={this.handleChange} placeholder='Search Git Handle...'/>
-          <button onClick={this.handleSubmit}>Got Git'em!</button>
+          <button onClick={this.handleSubmit}>Go Git'em!</button>
         </form>
         <User user={this.state.user}/>
         <FollowerList 
