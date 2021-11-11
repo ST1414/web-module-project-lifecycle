@@ -84,7 +84,7 @@ class App extends React.Component {
         <h1>GitHub Grabber</h1>
         <form className='search-section'>
           <input type='text' id='search-bar' value={this.state.search} onChange={this.handleChange} placeholder='Search Git Handle...'/>
-          <button onClick={this.handleSubmit}>Got Git'em!</button>
+          <button onClick={this.handleSubmit}>Go Git'em!</button>
         </form>
         <User user={this.state.user}/>
         <FollowerList 
