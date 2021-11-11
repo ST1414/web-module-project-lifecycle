@@ -9,7 +9,7 @@ import axios from 'axios';
 class App extends React.Component {
   
   state = {
-    search: 'wlongmire',
+    search: 'st1414',
     user: {},
     followers: []
   }
