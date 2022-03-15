@@ -9,7 +9,7 @@ class Follower extends React.Component {
 
     render (){
         return (
-            <div className='follower'>
+            <div className='follower-container'>
                 <img 
                     id={this.props.follower.login} 
                     className='follower-image' 
