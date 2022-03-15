@@ -41,16 +41,13 @@ body h1 {
   padding: 10px 10px;
   display: flex;
   flex-direction: column;
-  justify-content: flex-start;
-  vertical-align: top;
-  /* border: 2px blue solid; */
+  justify-content: center;
 }
 .user-totals {
   margin: 10px 0px
 }
 .user-info h2, .user-info h4 {
   margin: 0;
-  /* border: 2px green solid; */
 }
 
 /* ----- Followers Section ----- */
@@ -58,7 +55,6 @@ body h1 {
   display: flex;
   flex-wrap: wrap;
   justify-content: space-around;
-  /* border: 2px red solid */
 }
 .follower{
   margin: 10px;
@@ -74,3 +70,15 @@ body h1 {
   
 }
 
+/* ----- Media Queries ----- */
+
+@media (max-width:705px){
+  .user-container {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;;
+  }
+  .user-name {
+    text-align: center;
+  }
+}
